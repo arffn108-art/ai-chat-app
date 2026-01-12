@@ -2,20 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>AI Chat App</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <link rel="stylesheet" href="style.css" />
 
+  <!-- Favicon (optional but nice) -->
+  <link rel="icon" href="icon-192.png" />
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Theme color -->
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- iPhone/iPad support (optional but recommended) -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AI Chat" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+</head>
+
+<body>
   <div class="container">
     <div class="card">
-
       <h2>AI Chat App</h2>
 
-      <!-- Chat messages will appear here -->
+      <!-- Chat messages -->
       <div id="chat"></div>
 
       <!-- Input row -->
@@ -24,17 +39,23 @@
           id="input"
           type="text"
           placeholder="Type your question..."
+          autocomplete="off"
         />
         <button id="send">Send</button>
       </div>
 
       <div class="small">Press Enter to send</div>
-
     </div>
   </div>
 
   <!-- JavaScript -->
   <script src="app.js"></script>
 
+  <!-- Register Service Worker (REQUIRED for install button) -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js");
+    }
+  </script>
 </body>
 </html>
