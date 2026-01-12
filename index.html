@@ -1,23 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Chat App</title>
-  
-<link rel="stylesheet" href="style.css">
 
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <h2>AI Chat App</h2>
-  <div id="chat"></div>
 
-  <div id="row">
-    <input id="input" placeholder="Type your question..." />
-    <button id="send">Send</button>
+  <div class="container">
+    <div class="card">
+
+      <h2>AI Chat App</h2>
+
+      <!-- Chat messages will appear here -->
+      <div id="chat"></div>
+
+      <!-- Input row -->
+      <div id="row">
+        <input
+          id="input"
+          type="text"
+          placeholder="Type your question..."
+        />
+        <button id="send">Send</button>
+      </div>
+
+      <div class="small">Press Enter to send</div>
+
+    </div>
   </div>
 
+  <!-- JavaScript -->
   <script src="app.js"></script>
 
 </body>
 </html>
-
