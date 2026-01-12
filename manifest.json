@@ -1,0 +1,8 @@
+{
+  "name": "AI Chat App",
+  "short_name": "AI Chat",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
