@@ -1,21 +1,13 @@
 {
   "name": "AI Chat App",
   "short_name": "AI Chat",
-  "description": "AI Chat App developed by Fahad",
   "start_url": "/ai-chat-app/",
+  "scope": "/ai-chat-app/",
   "display": "standalone",
   "background_color": "#0b1220",
   "theme_color": "#0b1220",
   "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }

@@ -5,57 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>AI Chat App</title>
+  <meta name="description" content="A simple AI chat app. Developed by Fahad." />
+  <meta name="theme-color" content="#0b1220" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Favicon (optional but nice) -->
-  <link rel="icon" href="icon-192.png" />
-
-  <!-- PWA Manifest -->
+  <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
-
-  <!-- Theme color -->
-  <meta name="theme-color" content="#0b1220" />
-
-  <!-- iPhone/iPad support (optional but recommended) -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="AI Chat" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
 </head>
 
 <body>
-  <div class="container">
-    <div class="card">
-      <h2>AI Chat App</h2>
+  <div class="bg-orb orb1"></div>
+  <div class="bg-orb orb2"></div>
+  <div class="bg-orb orb3"></div>
 
-      <!-- Chat messages -->
-      <div id="chat"></div>
+  <main class="wrap">
+    <section class="panel">
+      <header class="topbar">
+        <div class="brand">
+          <img class="logo" src="icon-192.png" alt="App Icon" />
+          <div class="brand-text">
+            <div class="title">AI Chat App</div>
+            <div class="subtitle">Developed by <strong>Fahad</strong></div>
+          </div>
+        </div>
 
-      <!-- Input row -->
-      <div id="row">
+        <div class="pill">PWA • Installable</div>
+      </header>
+
+      <div id="chat" class="chat"></div>
+
+      <footer class="composer">
         <input
           id="input"
           type="text"
           placeholder="Type your question..."
           autocomplete="off"
         />
-        <button id="send">Send</button>
-      </div>
+        <button id="send" type="button">Send</button>
+      </footer>
 
-      <div class="small">Press Enter to send</div>
-    </div>
-  </div>
+      <div class="hint">Press Enter to send • Shift+Enter for new line</div>
+    </section>
+  </main>
 
-  <!-- JavaScript -->
   <script src="app.js"></script>
-
-  <!-- Register Service Worker (REQUIRED for install button) -->
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js");
-    }
-  </script>
 </body>
 </html>
