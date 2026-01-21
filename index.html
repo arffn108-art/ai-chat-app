@@ -3,52 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>AI Chat App</title>
-  <meta name="description" content="A simple AI chat app. Developed by Fahad." />
-  <meta name="theme-color" content="#0b1220" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Favicon (browser tab logo) -->
+  <link rel="icon" href="icon-192.png" />
 </head>
 
 <body>
+  <!-- background orbs -->
   <div class="bg-orb orb1"></div>
   <div class="bg-orb orb2"></div>
   <div class="bg-orb orb3"></div>
 
-  <main class="wrap">
-    <section class="panel">
-      <header class="topbar">
+  <div class="wrap">
+    <div class="panel">
+      <div class="topbar">
         <div class="brand">
-          <img class="logo" src="icon-192.png" alt="App Icon" />
+          <div class="logo" aria-hidden="true"></div>
           <div class="brand-text">
             <div class="title">AI Chat App</div>
-            <div class="subtitle">Developed by <strong>Fahad</strong></div>
+            <div class="subtitle">Developed by Fahad Ateeq</div>
           </div>
         </div>
 
-        <div class="pill">PWA • Installable</div>
-      </header>
+        <div class="pill">PWA · Installable</div>
+      </div>
 
       <div id="chat" class="chat"></div>
 
-      <footer class="composer">
-        <input
-          id="input"
-          type="text"
-          placeholder="Type your question..."
-          autocomplete="off"
-        />
-        <button id="send" type="button">Send</button>
-      </footer>
+      <div class="composer">
+        <!-- Image Upload -->
+        <label class="fileBtn">
+          📷
+          <input id="image" type="file" accept="image/*" />
+        </label>
 
-      <div class="hint">Press Enter to send • Shift+Enter for new line</div>
-    </section>
-  </main>
+        <!-- Text -->
+        <input id="input" type="text" placeholder="Type your question..." autocomplete="off" />
+
+        <!-- Send -->
+        <button id="send">Send</button>
+      </div>
+
+      <div class="hint">Press Enter to send · Shift+Enter for new line</div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

@@ -1,23 +1,21 @@
-const WEBHOOK_URL = "https://silent-flower.arffn108.workers.dev/";
+const WEBHOOK_URL = "https://silent-flower.arffn108.workers.dev/"; // your worker URL
 
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const sendBtn = document.getElementById("send");
+const imageInput = document.getElementById("image");
 
-// Change your developer name here anytime
-const DEVELOPER_NAME = "Fahad";
-
-function addMsg(who, text) {
+function addMsg(label, html) {
   const row = document.createElement("div");
   row.className = "msg";
 
   const badge = document.createElement("div");
-  badge.className = "badge " + (who === "You" ? "me" : "ai");
-  badge.textContent = who;
+  badge.className = "badge " + (label === "You" ? "me" : "ai");
+  badge.textContent = label;
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
-  bubble.textContent = text;
+  bubble.innerHTML = html;
 
   row.appendChild(badge);
   row.appendChild(bubble);
@@ -25,59 +23,64 @@ function addMsg(who, text) {
   chat.scrollTop = chat.scrollHeight;
 }
 
-function isDevQuestion(message) {
-  const m = message.toLowerCase();
-  return (
-    m.includes("developer") ||
-    m.includes("dev") ||
-    m.includes("who made") ||
-    m.includes("who created") ||
-    m.includes("who built") ||
-    m.includes("your creator") ||
-    m.includes("your developer") ||
-    m.includes("kis ne banaya") ||
-    m.includes("banaya kis ne")
-  );
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result); // data:image/...;base64,xxxx
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 async function send() {
   const message = input.value.trim();
-  if (!message) return;
+  const file = imageInput?.files?.[0];
 
-  addMsg("You", message);
-  input.value = "";
+  if (!message && !file) return;
 
-  // ✅ Local answer for developer questions
-  if (isDevQuestion(message)) {
-    addMsg("AI", `This app was developed by ${DEVELOPER_NAME}.`);
-    return;
+  // show user message
+  if (message) addMsg("You", message);
+
+  // show user image preview
+  if (file) {
+    const previewUrl = URL.createObjectURL(file);
+    addMsg("You", `<img class="chatImage" src="${previewUrl}" alt="uploaded image" />`);
   }
 
-  // Typing indicator
+  input.value = "";
   addMsg("AI", "Typing...");
 
   try {
+    let imageBase64 = null;
+    if (file) imageBase64 = await fileToBase64(file);
+
     const res = await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({
+        message,
+        image: imageBase64,
+        developerName: "Fahad Ateeq"
+      })
     });
 
     const data = await res.json();
 
-    // remove typing...
-    chat.lastChild?.remove();
+    // remove Typing...
+    chat.lastChild.remove();
 
-    addMsg("AI", data.reply || "No reply received.");
+    addMsg("AI", (data.reply || "No reply received.").replace(/\n/g, "<br>"));
   } catch (err) {
-    chat.lastChild?.remove();
+    chat.lastChild.remove();
     addMsg("AI", "Error: Could not reach the server.");
   }
+
+  // clear image after sending
+  if (imageInput) imageInput.value = "";
 }
 
 sendBtn.onclick = send;
 
-// Enter = send, Shift+Enter = new line (simple behavior)
 input.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
