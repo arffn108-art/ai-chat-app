@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>AI Chat App</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- PWA -->
+  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0b1220" />
 
-  <!-- Favicon (browser tab logo) -->
-  <link rel="icon" href="icon-192.png" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -23,36 +21,53 @@
   <div class="bg-orb orb3"></div>
 
   <div class="wrap">
-    <div class="panel">
+    <div class="panel" id="dropZone">
       <div class="topbar">
         <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
+          <img class="logo" src="icon-192.png" alt="App Logo" />
           <div class="brand-text">
             <div class="title">AI Chat App</div>
             <div class="subtitle">Developed by Fahad Ateeq</div>
           </div>
         </div>
-
         <div class="pill">PWA · Installable</div>
       </div>
 
-      <div id="chat" class="chat"></div>
+      <!-- Chat -->
+      <div class="chat" id="chat"></div>
 
+      <!-- Image preview bar -->
+      <div class="preview" id="preview" style="display:none;">
+        <img id="previewImg" alt="Selected image preview" />
+        <button class="ghost" id="removeImgBtn" title="Remove image">Remove</button>
+      </div>
+
+      <!-- Composer -->
       <div class="composer">
-        <!-- Image Upload -->
-        <label class="fileBtn">
+        <!-- hidden file input -->
+        <input id="imageInput" type="file" accept="image/*" hidden />
+
+        <!-- camera button -->
+        <button class="icon-btn" id="pickImageBtn" title="Upload image">
           📷
-          <input id="image" type="file" accept="image/*" />
-        </label>
+        </button>
 
-        <!-- Text -->
-        <input id="input" type="text" placeholder="Type your question..." autocomplete="off" />
+        <input
+          id="input"
+          type="text"
+          placeholder="Type your question..."
+          autocomplete="off"
+        />
 
-        <!-- Send -->
         <button id="send">Send</button>
       </div>
 
-      <div class="hint">Press Enter to send · Shift+Enter for new line</div>
+      <div class="hint">Drag & drop an image anywhere on this box • Or click 📷 • Press Enter to send</div>
+
+      <!-- drag overlay -->
+      <div class="drop-overlay" id="dropOverlay" style="display:none;">
+        Drop image to upload
+      </div>
     </div>
   </div>
 

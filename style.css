@@ -16,10 +16,9 @@ body{
   margin:0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
   color: var(--text);
-  background:
-    radial-gradient(1100px 800px at 10% 10%, rgba(96,165,250,.20), transparent 60%),
-    radial-gradient(1000px 700px at 90% 20%, rgba(34,197,94,.16), transparent 55%),
-    linear-gradient(180deg, var(--bg1), var(--bg2));
+  background: radial-gradient(1000px 700px at 10% 10%, rgba(96,165,250,.18), transparent 60%),
+              radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.14), transparent 55%),
+              linear-gradient(180deg, var(--bg1), var(--bg2));
   overflow:hidden;
 }
 
@@ -32,9 +31,9 @@ body{
   transform: translateZ(0);
   animation: floaty 9s ease-in-out infinite;
 }
-.orb1{ width:560px; height:560px; left:-160px; top:-160px; background: rgba(96,165,250,.35); }
-.orb2{ width:680px; height:680px; right:-220px; top:-160px; background: rgba(34,197,94,.30); animation-duration: 11s; }
-.orb3{ width:560px; height:560px; left:28%; bottom:-260px; background: rgba(168,85,247,.22); animation-duration: 13s; }
+.orb1{ width:520px; height:520px; left:-140px; top:-140px; background: rgba(96,165,250,.35); }
+.orb2{ width:620px; height:620px; right:-180px; top:-120px; background: rgba(34,197,94,.28); animation-duration: 11s; }
+.orb3{ width:520px; height:520px; left:30%; bottom:-220px; background: rgba(168,85,247,.22); animation-duration: 13s; }
 
 @keyframes floaty{
   0%,100%{ transform: translate(0,0) scale(1); }
@@ -49,9 +48,9 @@ body{
   padding:18px;
 }
 
-/* ✅ Bigger panel (your marked area gets bigger) */
+/* ✅ BIGGER panel */
 .panel{
-  width: min(1200px, 96vw);
+  width: min(1200px, 98vw);
   height: min(880px, 94vh);
   background: var(--panel);
   border: 1px solid var(--border);
@@ -61,6 +60,7 @@ body{
   display:flex;
   flex-direction:column;
   overflow:hidden;
+  position: relative;
 }
 
 .topbar{
@@ -83,9 +83,7 @@ body{
   border-radius:12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.06);
-  background-image: url("icon-192.png");
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
 }
 
 .brand-text .title{
@@ -108,7 +106,6 @@ body{
   background: rgba(255,255,255,.06);
 }
 
-/* chat area */
 .chat{
   padding:16px;
   flex:1;
@@ -152,31 +149,38 @@ body{
   white-space: pre-wrap;
 }
 
-/* composer */
+.bubble img{
+  max-width: 360px;
+  width: 100%;
+  border-radius: 12px;
+  display:block;
+  border: 1px solid rgba(255,255,255,.12);
+  margin-top: 8px;
+}
+
+.preview{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 16px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,.10);
+}
+
+.preview img{
+  height: 44px;
+  width: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,.12);
+}
+
 .composer{
   display:flex;
   gap:10px;
   padding:14px 16px;
   border-top: 1px solid var(--border);
   background: rgba(0,0,0,.10);
-  align-items:center;
-}
-
-.fileBtn{
-  width:44px;
-  height:44px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background: rgba(255,255,255,.06);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  user-select:none;
-}
-
-.fileBtn input{
-  display:none;
 }
 
 #input{
@@ -203,20 +207,43 @@ button{
 button:hover{ filter: brightness(1.08); }
 button:active{ transform: translateY(1px); }
 
+.icon-btn{
+  width: 46px;
+  padding: 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.ghost{
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+}
+
 .hint{
   padding:0 16px 14px;
   font-size:12px;
   color: var(--muted);
 }
 
-img.chatImage{
-  max-width: 320px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.12);
-  display:block;
+/* Drag overlay */
+.drop-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.45);
+  border: 2px dashed rgba(96,165,250,.55);
+  border-radius: var(--radius);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  backdrop-filter: blur(4px);
 }
 
 @media (max-width:520px){
-  .panel{ height: 96vh; width: 96vw; }
+  .panel{ height: 94vh; width: 98vw; }
   .pill{ display:none; }
+  .bubble img{ max-width: 100%; }
 }
